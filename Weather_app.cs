@@ -10,7 +10,7 @@ namespace WeatherApp
 {
     public partial class MainWindow : Window
     {
-        private static readonly string apiKey = "YOUR_API_KEY";//works if you pay subscription to openweathermap.org
+        private static readonly string apiKey = "44d5686adca5804b4770bb25a76260c8";//works if you pay subscription to openweathermap.org
         private static readonly string apiUrl = "https://api.openweathermap.org/data/2.5/weather?q={0}&appid=" + apiKey + "&units=metric";
         private static readonly string forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q={0}&appid=" + apiKey + "&units=metric";
         private DispatcherTimer refreshTimer;
@@ -18,8 +18,8 @@ namespace WeatherApp
         public MainWindow()
         {
             InitializeComponent();
-            GetWeather("New York"); // Default location
-            GetForecast("New York");
+            GetWeather("Regina"); // Default location
+            GetForecast("Regina");
             
             refreshTimer = new DispatcherTimer();
             refreshTimer.Interval = TimeSpan.FromMinutes(5);
@@ -118,3 +118,4 @@ namespace WeatherApp
         }
     }
 }
+
