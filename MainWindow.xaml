@@ -1,0 +1,67 @@
+<Window x:Class="WeatherApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Weather Dashboard" Height="600" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Rectangle x:Name="WeatherBackground" Fill="WhiteSmoke" />
+
+        <StackPanel Margin="25">
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="CityInput" Grid.Column="0" Margin="0,0,10,0" 
+                         VerticalContentAlignment="Center" Padding="8" FontSize="14" 
+                         KeyDown="CityInput_KeyDown" ToolTip="Press Enter to search"/>
+                <Button Grid.Column="1" Content="Search" Width="80" 
+                        Click="SearchButton_Click" Background="#007ACC" 
+                        Foreground="White" FontWeight="Bold" Cursor="Hand"/>
+            </Grid>
+
+            <TextBlock x:Name="LoadingText" Text="Fetching weather data..." Visibility="Collapsed" 
+                       HorizontalAlignment="Center" Foreground="#555555" Margin="0,0,0,10"/>
+
+            <TextBlock x:Name="CurrentCity" Text="Loading..." FontSize="28" 
+                       FontWeight="Bold" HorizontalAlignment="Center" Foreground="#222"/>
+
+            <Image x:Name="WeatherIcon" Width="100" Height="100" Margin="0,5" />
+
+            <TextBlock x:Name="Temperature" Text="--°C" FontSize="52" 
+                       FontWeight="Bold" HorizontalAlignment="Center" Foreground="#111" />
+
+            <TextBlock x:Name="WeatherCondition" Text="--" FontSize="20" 
+                       HorizontalAlignment="Center" Margin="0,0,0,20" Foreground="#444" />
+
+            <TextBlock Text="Upcoming Forecast (3-Hour Intervals):" FontWeight="Bold" Margin="0,0,0,5" Foreground="#222"/>
+            <Border Background="#CCFFFFFF" CornerRadius="8" Padding="10" BorderBrush="#BBBBBB" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="150">
+                    <ItemsControl x:Name="ForecastList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="110"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" Text="{Binding Time}" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#333"/>
+                                    <Image Grid.Column="1" Source="{Binding IconUrl}" Width="30" Height="30" />
+                                    <TextBlock Grid.Column="2" Text="{Binding Condition}" VerticalAlignment="Center" Foreground="#555"/>
+                                    <TextBlock Grid.Column="3" Text="{Binding Temp}" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Right" Foreground="#111"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+
+            <CheckBox Content="Auto-Refresh every 5 minutes" Margin="0,20,0,0" 
+                      HorizontalAlignment="Center"
+                      Checked="AutoRefresh_Checked" Unchecked="AutoRefresh_Unchecked" />
+        </StackPanel>
+    </Grid>
+</Window>
